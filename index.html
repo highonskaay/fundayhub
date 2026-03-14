@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FunDay Hub — India's #1 Fun Friday Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #1A5C3A;
+      --green2:  #237A4E;
+      --green-light: #E8F5EE;
+      --amber:   #F59E0B;
+      --amber2:  #D97706;
+      --cream:   #FDFAF4;
+      --dark:    #0F1A13;
+      --text:    #1C2B1E;
+      --muted:   #6B7C6E;
+      --white:   #FFFFFF;
+      --card-bg: #FFFFFF;
+      --border:  #D8EBE0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── CURSOR ── */
+    * { cursor: default; }
+    a, button { cursor: pointer; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(253,250,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(26,92,58,0.1); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--green);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--amber); }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--green);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      color: var(--text); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    .nav-cta {
+      background: var(--green); color: white;
+      padding: 10px 22px; border-radius: 50px;
+      font-size: 0.88rem; font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--green2); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 40%, rgba(26,92,58,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(245,158,11,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* floating shapes */
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.06;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-shape.s1 { width: 400px; height: 400px; background: var(--green); top: -100px; right: -80px; animation-delay: 0s; }
+    .hero-shape.s2 { width: 200px; height: 200px; background: var(--amber); bottom: 10%; left: 5%; animation-delay: 3s; }
+    .hero-shape.s3 { width: 120px; height: 120px; background: var(--green2); top: 30%; right: 25%; animation-delay: 5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.03); }
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-light); color: var(--green);
+      padding: 8px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600;
+      border: 1px solid rgba(26,92,58,0.15);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .badge-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+    .hero h1 .highlight {
+      position: relative; display: inline-block;
+    }
+    .hero h1 .highlight::after {
+      content: '';
+      position: absolute; bottom: 2px; left: 0; right: 0;
+      height: 10px;
+      background: var(--amber);
+      opacity: 0.35;
+      border-radius: 2px;
+      z-index: -1;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem; line-height: 1.7;
+      color: var(--muted); max-width: 480px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.7s 0.2s ease both;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--green); color: white;
+      padding: 16px 32px; border-radius: 50px;
+      font-size: 1rem; font-weight: 600;
+      text-decoration: none; border: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(26,92,58,0.3);
+    }
+    .btn-primary:hover { background: var(--green2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,92,58,0.35); }
+
+    .btn-secondary {
+      background: transparent; color: var(--green);
+      padding: 16px 32px; border-radius: 50px;
+      font-size: 1rem; font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--green);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--green-light); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex; gap: 32px;
+      margin-top: 48px;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--green);
+    }
+    .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-card-main {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(26,92,58,0.12);
+      position: relative;
+    }
+
+    .card-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .card-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .card-name { font-weight: 600; font-size: 0.95rem; }
+    .card-role { font-size: 0.78rem; color: var(--muted); }
+    .card-badge-green {
+      margin-left: auto;
+      background: var(--green-light); color: var(--green);
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 0.72rem; font-weight: 600;
+    }
+
+    .workshop-list { display: flex; flex-direction: column; gap: 12px; }
+    .workshop-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .workshop-item:hover { border-color: var(--green); background: var(--green-light); }
+    .workshop-item.active { border-color: var(--green); background: var(--green-light); }
+    .wi-icon { font-size: 1.4rem; width: 36px; text-align: center; }
+    .wi-info { flex: 1; }
+    .wi-name { font-size: 0.88rem; font-weight: 600; }
+    .wi-meta { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+    .wi-price { font-size: 0.85rem; font-weight: 700; color: var(--green); }
+
+    .hero-card-float {
+      position: absolute;
+      background: white; border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+    .hcf-1 { top: -20px; right: -20px; animation-delay: 1s; }
+    .hcf-2 { bottom: -16px; left: -20px; animation-delay: 4s; }
+    .hcf-label { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+    .hcf-val { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); margin-top: 2px; }
+    .hcf-sub { font-size: 0.7rem; color: var(--muted); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      background: var(--green);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.88rem; font-weight: 500;
+      padding: 0 32px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .marquee-dot { color: var(--amber); font-size: 1.2rem; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 96px 5%; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-light); color: var(--green);
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--dark);
+      max-width: 620px;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+
+    .section-sub {
+      font-size: 1.05rem; color: var(--muted);
+      margin-top: 16px; max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .how-header { margin-bottom: 64px; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .step-card {
+      background: white;
+      padding: 40px 32px;
+      position: relative;
+      transition: background 0.25s;
+    }
+    .step-card:hover { background: var(--green-light); }
+
+    .step-num {
+      font-family: 'Fraunces', serif;
+      font-size: 4rem; font-weight: 900;
+      color: var(--green); opacity: 0.12;
+      position: absolute; top: 16px; right: 24px;
+      line-height: 1;
+    }
+
+    .step-icon {
+      width: 56px; height: 56px;
+      background: var(--green);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .step-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem; font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    .step-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── WORKSHOPS SECTION ── */
+    .workshops-section {
+      background: var(--dark);
+      color: white;
+    }
+
+    .workshops-inner { max-width: 1200px; margin: 0 auto; }
+    .workshops-header { margin-bottom: 56px; }
+    .workshops-header .section-title { color: white; }
+    .workshops-header .section-sub { color: rgba(255,255,255,0.55); }
+    .workshops-header .section-tag { background: rgba(26,92,58,0.4); color: #6FFFA8; }
+
+    .workshops-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .workshop-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px 22px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .workshop-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--amber));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .workshop-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(26,92,58,0.5); transform: translateY(-4px); }
+    .workshop-card:hover::before { transform: scaleX(1); }
+
+    .wc-emoji { font-size: 2.2rem; margin-bottom: 16px; display: block; }
+    .wc-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: white; margin-bottom: 8px;
+    }
+    .wc-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 16px; }
+    .wc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .wc-tag {
+      background: rgba(245,158,11,0.15);
+      color: var(--amber);
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.72rem; font-weight: 600;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testimonials-header { margin-bottom: 56px; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .testi-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(26,92,58,0.1); }
+
+    .testi-quote {
+      font-size: 2.5rem; line-height: 1;
+      color: var(--green); opacity: 0.2;
+      font-family: 'Fraunces', serif;
+      margin-bottom: 12px;
+    }
+    .testi-text {
+      font-size: 0.95rem; line-height: 1.7;
+      color: var(--text); margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testi-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--amber));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: white; font-weight: 700;
+    }
+    .testi-name { font-weight: 600; font-size: 0.9rem; }
+    .testi-company { font-size: 0.78rem; color: var(--muted); }
+    .testi-stars { color: var(--amber); font-size: 0.85rem; margin-bottom: 4px; }
+
+    /* ── PRICING ── */
+    .pricing-section { background: var(--green-light); }
+    .pricing-inner { max-width: 1100px; margin: 0 auto; }
+    .pricing-header { margin-bottom: 56px; text-align: center; }
+    .pricing-header .section-title, .pricing-header .section-sub { max-width: 100%; text-align: center; margin: 0 auto; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 28px;
+      border: 2px solid transparent;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .pricing-card.popular {
+      border-color: var(--green);
+      box-shadow: 0 20px 60px rgba(26,92,58,0.15);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+
+    .popular-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: white;
+      padding: 5px 18px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pricing-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pricing-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+    .pricing-price {
+      font-family: 'Fraunces', serif;
+      font-size: 2.4rem; font-weight: 900;
+      color: var(--green);
+    }
+    .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
+    .pricing-divider { height: 1px; background: var(--border); margin: 24px 0; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .pricing-features li {
+      font-size: 0.88rem; display: flex; align-items: flex-start; gap: 10px; color: var(--text);
+    }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .btn-plan {
+      width: 100%;
+      padding: 14px;
+      border-radius: 50px;
+      font-size: 0.92rem; font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-plan-primary { background: var(--green); color: white; }
+    .btn-plan-primary:hover { background: var(--green2); }
+    .btn-plan-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
+    .btn-plan-outline:hover { background: var(--green-light); }
+
+    /* ── VENDORS CTA ── */
+    .vendor-section {
+      background: linear-gradient(135deg, var(--dark) 0%, #0D2B1A 100%);
+      color: white;
+    }
+    .vendor-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .vendor-text .section-title { color: white; max-width: 100%; }
+    .vendor-text .section-sub { color: rgba(255,255,255,0.55); max-width: 100%; }
+    .vendor-text .section-tag { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+    .vendor-benefits { list-style: none; display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
+    .vendor-benefits li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 0.92rem; color: rgba(255,255,255,0.8);
+    }
+    .vb-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(26,92,58,0.4); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    .vendor-card-mockup {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 28px;
+    }
+    .vcm-header { display: flex; gap: 8px; margin-bottom: 20px; }
+    .vcm-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .vcm-dot.r { background: #FF5F57; }
+    .vcm-dot.y { background: #FFBD2E; }
+    .vcm-dot.g { background: #28C840; }
+
+    .vcm-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .vcm-stat {
+      background: rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 16px;
+    }
+    .vcm-stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--amber);
+    }
+    .vcm-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    .vcm-bar-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .vcm-bar-track { background: rgba(255,255,255,0.1); border-radius: 4px; height: 8px; margin-bottom: 8px; overflow: hidden; }
+    .vcm-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--green), var(--amber)); }
+
+    /* ── CONTACT / LEAD FORM ── */
+    .contact-section { background: var(--cream); }
+    .contact-inner {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: start;
+    }
+
+    .contact-info { padding-top: 8px; }
+    .contact-info .section-tag { margin-bottom: 16px; }
+
+    .contact-details { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+    .cd-item {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .cd-icon {
+      width: 36px; height: 36px; background: var(--green-light);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+
+    .contact-form-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 12px 40px rgba(26,92,58,0.08);
+      border: 1px solid var(--border);
+    }
+    .form-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem; font-weight: 700;
+      margin-bottom: 6px; color: var(--dark);
+    }
+    .form-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-size: 0.82rem; font-weight: 600;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(26,92,58,0.08);
+    }
+    .form-group textarea { resize: none; height: 80px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--green); color: white;
+      border: none; border-radius: 50px;
+      font-size: 0.95rem; font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(26,92,58,0.25);
+    }
+    .btn-submit:hover { background: var(--green2); transform: translateY(-1px); }
+
+    .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 10px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 56px 5% 32px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px; margin-bottom: 48px;
+    }
+    .footer-brand { }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: white; margin-bottom: 14px;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--amber); }
+    .footer-desc { font-size: 0.85rem; line-height: 1.7; max-width: 260px; }
+
+    .footer-col h4 {
+      color: white; font-size: 0.88rem; font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 0.85rem; transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--amber); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 0.82rem; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-btn {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .social-btn:hover { background: var(--green); }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 30px; right: 30px;
+      background: var(--green); color: white;
+      padding: 14px 22px; border-radius: 14px;
+      font-size: 0.9rem; font-weight: 600;
+      box-shadow: 0 8px 30px rgba(26,92,58,0.3);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .workshops-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .vendor-inner { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🎉</div>
+    FunDay<span>Hub</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#workshops">Workshops</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#vendors">For Vendors</a>
+    <a href="#contact" class="nav-cta">Book a Workshop →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-shape s1"></div>
+  <div class="hero-shape s2"></div>
+  <div class="hero-shape s3"></div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        India's #1 Fun Friday Marketplace — Pune
+      </div>
+      <h1>
+        Stop Googling.<br>
+        Start <em>Celebrating</em><br>
+        Your <span class="highlight">Team.</span>
+      </h1>
+      <p class="hero-sub">
+        FunDay Hub connects HR teams with Pune's best curated workshop vendors — terrariums, resin art, candle making, cooking, wellness & more. One platform, zero stress.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get Free Consultation →</a>
+        <a href="#workshops" class="btn-secondary">Browse Workshops</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Workshop Types</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Verified Vendors</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Happy Employees</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card-float hcf-1">
+        <div class="hcf-label">Avg. Booking Time</div>
+        <div class="hcf-val">8 min</div>
+        <div class="hcf-sub">vs. 8 hrs manually</div>
+      </div>
+      <div class="hero-card-main">
+        <div class="card-header">
+          <div class="card-avatar">👩</div>
+          <div>
+            <div class="card-name">Priya Sharma</div>
+            <div class="card-role">HR Manager · TechCorp Pune</div>
+          </div>
+          <div class="card-badge-green">✓ Booked</div>
+        </div>
+        <div class="workshop-list">
+          <div class="workshop-item active">
+            <div class="wi-icon">🌿</div>
+            <div class="wi-info">
+              <div class="wi-name">Terrarium Making</div>
+              <div class="wi-meta">45 people · 2 hrs · On-site</div>
+            </div>
+            <div class="wi-price">₹999/head</div>
+          </div>
+          <div class="workshop-item">
+            <div class="wi-icon">🎨</div>
+            <div class="wi-info">
+              <div class="wi-name">Resin Art Workshop</div>
+              <div class="wi-meta">30 people · 1.5 hrs · On-site</div>
+            </div>
+            <div class="wi-price">₹1,200/head</div>
+          </div>
+          <div class="workshop-item">
+            <div class="wi-icon">🕯️</div>
+            <div class="wi-info">
+              <div class="wi-name">Candle Making</div>
+              <div class="wi-meta">60 people · 3 hrs · On-site</div>
+            </div>
+            <div class="wi-price">₹850/head</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card-float hcf-2">
+        <div class="hcf-label">This Friday</div>
+        <div class="hcf-val">Sorted ✓</div>
+        <div class="hcf-sub">Vendor confirmed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Terrarium Making</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Candle Making</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Resin Art</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Mandala Painting</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Chocolate Making</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Laughter Yoga</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Mocktail Mixology</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Sound Healing</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Pottery Workshop</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Murder Mystery</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Improv Theatre</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Terrarium Making</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Candle Making</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Resin Art</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Mandala Painting</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Chocolate Making</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Laughter Yoga</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Mocktail Mixology</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Sound Healing</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Pottery Workshop</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Murder Mystery</div>
+    <div class="marquee-item"><span class="marquee-dot">✦</span> Improv Theatre</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <div class="section-tag">⚡ How It Works</div>
+      <h2 class="section-title">From idea to <em>epic event</em> in 3 steps</h2>
+      <p class="section-sub">No more WhatsApp chains, no more vendor ghosting, no more last-minute panic. We handle everything.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">🔍</div>
+        <h3>Tell Us What You Need</h3>
+        <p>Share your team size, budget, preferred date and vibe. Takes 2 minutes. We'll match you with the perfect workshops from our curated vendor network.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-icon">🤝</div>
+        <h3>We Curate & Confirm</h3>
+        <p>Our team sends you 3–5 personalised workshop options with full pricing, vendor profiles, and HR reviews. You pick. We handle the rest.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-icon">🎉</div>
+        <h3>Enjoy the Day</h3>
+        <p>The vendor arrives at your office with all materials. Your employees create, bond, and leave with a take-home keepsake. Zero effort from you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section class="workshops-section" id="workshops">
+  <div class="workshops-inner">
+    <div class="workshops-header reveal">
+      <div class="section-tag">🎨 Workshop Catalogue</div>
+      <h2 class="section-title">50+ workshops across <em>8 categories</em></h2>
+      <p class="section-sub">Something for every team culture, every budget, and every Friday.</p>
+    </div>
+    <div class="workshops-grid">
+      <div class="workshop-card reveal">
+        <span class="wc-emoji">🌿</span>
+        <div class="wc-name">Arts & Crafts</div>
+        <div class="wc-desc">Terrarium, Mandala, Resin Art, Diya Painting, Mug Art, Macramé, Origami</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹700–₹1,800/head</span>
+          <span class="wc-tag">Most Popular</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal reveal-delay-1">
+        <span class="wc-emoji">🕯️</span>
+        <div class="wc-name">DIY & Making</div>
+        <div class="wc-desc">Candle Making, Soap Making, Jewellery, Leather Craft, Block Printing, Pottery</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹600–₹1,500/head</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal reveal-delay-2">
+        <span class="wc-emoji">🍫</span>
+        <div class="wc-name">Food & Drinks</div>
+        <div class="wc-desc">Chocolate Truffle, Cocktail/Mocktail Mixing, Cake Decorating, Sushi Rolling</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹900–₹2,000/head</span>
+          <span class="wc-tag">🔥 Trending</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal reveal-delay-3">
+        <span class="wc-emoji">🧘</span>
+        <div class="wc-name">Wellness</div>
+        <div class="wc-desc">Guided Meditation, Laughter Yoga, Sound Healing, Breathwork, Art Therapy</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹400–₹1,200/head</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal">
+        <span class="wc-emoji">🎭</span>
+        <div class="wc-name">Performance & Fun</div>
+        <div class="wc-desc">Stand-up Comedy, Improv Theatre, Bollywood Dance, Zumba, Drumming Circle</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹600–₹2,000/head</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal reveal-delay-1">
+        <span class="wc-emoji">🌱</span>
+        <div class="wc-name">Sustainability</div>
+        <div class="wc-desc">Seed Ball Making, Upcycling Craft, Organic Skincare, Pressed Flower Art</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹500–₹1,200/head</span>
+          <span class="wc-tag">Eco-friendly</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal reveal-delay-2">
+        <span class="wc-emoji">🧠</span>
+        <div class="wc-name">Skills & Learning</div>
+        <div class="wc-desc">Calligraphy, Photography, Public Speaking, Financial Literacy, Speed Reading</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹500–₹1,400/head</span>
+        </div>
+      </div>
+      <div class="workshop-card reveal reveal-delay-3">
+        <span class="wc-emoji">🎮</span>
+        <div class="wc-name">Games & Team Play</div>
+        <div class="wc-desc">Murder Mystery, Escape Room, Trivia Night, Scavenger Hunt, Board Game Café</div>
+        <div class="wc-tags">
+          <span class="wc-tag">₹300–₹1,500/head</span>
+          <span class="wc-tag">Best for 50+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header reveal">
+      <div class="section-tag">💬 What HR Teams Say</div>
+      <h2 class="section-title">Real results from <em>real Fridays</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I used to spend two weeks finding a good vendor. FunDay Hub did it in a day. The terrarium workshop was a massive hit — every employee went home smiling with their little garden.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">P</div>
+          <div>
+            <div class="testi-name">Priya Sharma</div>
+            <div class="testi-company">HR Manager · TechSolutions Pune</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The resin art workshop was unlike anything we'd done before. Our 60-person team was completely engaged for 2 hours straight. The vendor was professional and the setup was flawless.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Rahul Desai</div>
+            <div class="testi-company">People & Culture Lead · FinTech Co.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">We run monthly Fun Fridays now — something we never managed before. FunDay Hub keeps the ideas fresh every time. The candle making session was our team's all-time favourite.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <div class="testi-name">Ananya Kulkarni</div>
+            <div class="testi-company">HR Director · Pune IT Park MNC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-header reveal">
+      <div class="section-tag">💰 Pricing</div>
+      <h2 class="section-title">Simple, transparent <em>pricing</em></h2>
+      <p class="section-sub" style="margin:16px auto 0;">No hidden fees. No surprises. Just great Fridays.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-desc">Perfect for your first Fun Friday</div>
+        <div class="pricing-price">₹0 <span>platform fee</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Up to 30 employees</li>
+          <li>Access to 10+ workshop types</li>
+          <li>1 free consultation call</li>
+          <li>WhatsApp support</li>
+          <li>Vendor directly coordinated by us</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-outline">Get Started Free</a>
+      </div>
+      <div class="pricing-card popular reveal reveal-delay-1">
+        <div class="popular-badge">⭐ Most Popular</div>
+        <div class="pricing-name">Growth</div>
+        <div class="pricing-desc">For regular monthly Fun Fridays</div>
+        <div class="pricing-price">₹999 <span>/ month</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Up to 100 employees per event</li>
+          <li>Unlimited workshop browsing</li>
+          <li>Dedicated HR success manager</li>
+          <li>Priority vendor booking</li>
+          <li>Monthly fresh idea newsletter</li>
+          <li>Post-event photos & report</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-primary">Start Free Trial</a>
+      </div>
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-desc">For large teams & quarterly events</div>
+        <div class="pricing-price">Custom</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>100–500+ employees</li>
+          <li>Fully managed end-to-end service</li>
+          <li>Custom branded experience</li>
+          <li>Multi-city coordination</li>
+          <li>Quarterly event planning</li>
+          <li>Executive quarterly review</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-outline">Talk to Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENDORS CTA -->
+<section class="vendor-section" id="vendors">
+  <div class="vendor-inner">
+    <div class="vendor-text reveal">
+      <div class="section-tag">🤝 For Vendors</div>
+      <h2 class="section-title">Are you a workshop host? <em>Let's grow together.</em></h2>
+      <p class="section-sub">We bring you corporate clients every month — zero marketing on your end. You just show up and do what you love.</p>
+      <ul class="vendor-benefits">
+        <li>
+          <div class="vb-icon">📈</div>
+          <div>Guaranteed monthly booking pipeline from HR teams across Pune</div>
+        </li>
+        <li>
+          <div class="vb-icon">💰</div>
+          <div>Keep 90% of every booking. We take just 10% commission.</div>
+        </li>
+        <li>
+          <div class="vb-icon">🌟</div>
+          <div>Build your vendor profile with real corporate reviews and photos</div>
+        </li>
+        <li>
+          <div class="vb-icon">🛠️</div>
+          <div>We handle all logistics, payments, and HR coordination for you</div>
+        </li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Join as a Vendor →</a>
+    </div>
+    <div class="vendor-card-mockup reveal reveal-delay-1">
+      <div class="vcm-header">
+        <div class="vcm-dot r"></div>
+        <div class="vcm-dot y"></div>
+        <div class="vcm-dot g"></div>
+      </div>
+      <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;margin-bottom:16px;">Your Vendor Dashboard</div>
+      <div class="vcm-stat-grid">
+        <div class="vcm-stat">
+          <div class="vcm-stat-num">₹48K</div>
+          <div class="vcm-stat-label">This Month</div>
+        </div>
+        <div class="vcm-stat">
+          <div class="vcm-stat-num">12</div>
+          <div class="vcm-stat-label">Bookings</div>
+        </div>
+        <div class="vcm-stat">
+          <div class="vcm-stat-num">4.9★</div>
+          <div class="vcm-stat-label">Avg. Rating</div>
+        </div>
+        <div class="vcm-stat">
+          <div class="vcm-stat-num">340</div>
+          <div class="vcm-stat-label">Employees Served</div>
+        </div>
+      </div>
+      <div class="vcm-bar-label">Monthly Revenue Growth</div>
+      <div class="vcm-bar-track"><div class="vcm-bar-fill" style="width:30%"></div></div>
+      <div class="vcm-bar-label" style="margin-top:4px">Month 1</div>
+      <div class="vcm-bar-track"><div class="vcm-bar-fill" style="width:55%"></div></div>
+      <div class="vcm-bar-label" style="margin-top:4px">Month 2</div>
+      <div class="vcm-bar-track"><div class="vcm-bar-fill" style="width:85%"></div></div>
+      <div class="vcm-bar-label" style="margin-top:4px">Month 3</div>
+      <div style="margin-top:16px;padding:12px;background:rgba(245,158,11,0.1);border-radius:10px;border:1px solid rgba(245,158,11,0.2);">
+        <div style="font-size:0.75rem;color:var(--amber);font-weight:600;">🔔 New Booking Request</div>
+        <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);margin-top:4px;">50 people · Terrarium · This Friday · Hinjewadi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <div class="section-tag">📞 Get In Touch</div>
+      <h2 class="section-title" style="max-width:100%;">Let's plan your next <em>amazing Friday.</em></h2>
+      <p class="section-sub" style="max-width:100%;">Tell us about your team and we'll come back within 2 hours with curated workshop ideas and pricing.</p>
+      <div class="contact-details">
+        <div class="cd-item">
+          <div class="cd-icon">📍</div>
+          Pune, Maharashtra, India
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon">📱</div>
+          WhatsApp: +91 XXXXX XXXXX
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon">📧</div>
+          hello@fundayhub.in
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon">⏰</div>
+          Mon–Sat, 9 AM – 7 PM IST
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-card reveal reveal-delay-1">
+      <div class="form-title">Book a Free Consultation</div>
+      <div class="form-sub">Tell us about your team and we'll sort the rest 🎉</div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" placeholder="Priya Sharma" required />
+          </div>
+          <div class="form-group">
+            <label>Company Name *</label>
+            <input type="text" placeholder="TechCorp Pune" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" placeholder="hr@company.com" required />
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" placeholder="+91 98765 XXXXX" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Team Size</label>
+            <select>
+              <option>Select team size</option>
+              <option>10–30 people</option>
+              <option>30–60 people</option>
+              <option>60–100 people</option>
+              <option>100+ people</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Budget per Head</label>
+            <select>
+              <option>Select budget</option>
+              <option>Under ₹500</option>
+              <option>₹500–₹1,000</option>
+              <option>₹1,000–₹1,500</option>
+              <option>₹1,500+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Workshop Preference (optional)</label>
+          <textarea placeholder="E.g. something creative and hands-on, not too physical. Love the idea of terrarium or painting…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send My Request 🎉</button>
+        <p class="form-note">We respond within 2 hours on weekdays. Zero spam, ever.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">🎉 FunDay<span>Hub</span></a>
+        <p class="footer-desc">India's first marketplace for corporate Fun Friday workshops. Connecting HR teams with verified, passionate workshop vendors across Pune.</p>
+      </div>
+      <div class="footer-col">
+        <h4>For HR Teams</h4>
+        <ul>
+          <li><a href="#workshops">Browse Workshops</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Pricing Plans</a></li>
+          <li><a href="#contact">Book Consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Vendors</h4>
+        <ul>
+          <li><a href="#vendors">List Your Workshop</a></li>
+          <li><a href="#vendors">Vendor Dashboard</a></li>
+          <li><a href="#contact">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About FunDay Hub</a></li>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FunDay Hub · Made with ❤️ in Pune, India</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#">📷</a>
+        <a class="social-btn" href="#">💼</a>
+        <a class="social-btn" href="#">🐦</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">🎉 We'll reach out within 2 hours!</div>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+    this.reset();
+  });
+
+  // Workshop card hover in hero
+  document.querySelectorAll('.workshop-item').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.workshop-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
